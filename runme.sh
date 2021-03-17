@@ -13,7 +13,7 @@ netcdff_ver=4.5.3
 #: Image tags
 ubuntu_tag="mkl/ubuntu_gcc:${ubuntu_ver}_${gcc_ver}"
 spack_tag="mkl/spack_ubuntu_gcc:${ubuntu_ver}_${gcc_ver}"
-env_tag
+env_tag=mkl/env
 echo $ubuntu_tag
 echo $spack_tag
 
@@ -26,7 +26,7 @@ dfile_env=Dockerfile_env       #: to build the env image.  All softwares will be
 #: prep the Dockerfiles
 sed -e "s@_UBUNTUVER_@$ubuntu_ver@" < ${dfile_ubuntu}_TEMPLATE > $dfile_ubuntu
 
-sed -e "s@_UBUNTU_TAG_@a$ubuntu_tag@" \
+sed -e "s@_UBUNTU_TAG_@$ubuntu_tag@" \
     -e "s@_SPACK_VER_@$spack_ver@" < ${dfile_spack}_TEMPLATE > $dfile_spack
 
 sed -e "s@_SPACK_TAG_@$spack_tag@"    \
