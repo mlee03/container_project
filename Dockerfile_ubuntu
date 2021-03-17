@@ -1,0 +1,23 @@
+FROM ubuntu:18.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get -yqq update \
+ && apt-get -yqq install --no-install-recommends \
+        git \
+        autotools-dev \
+        automake \
+        libtool \
+        make \
+ && apt-get -y install software-properties-common       \
+ && add-apt-repository -y ppa:ubuntu-toolchain-r/test   \
+ && apt-get install -yqq gcc-10 gfortran-10 g++-10       \
+ && apt-get remove -y gcc-7 \
+ && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10 \
+ && update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-10 10 \
+ && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10 \
+ && add-apt-repository -y -r ppa:ubuntu-toolchain-r/test \
+ && apt-get remove -y software-properties-common \
+ && rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["/bin/bash"]
