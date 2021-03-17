@@ -1,0 +1,34 @@
+FROM _SPACK_TAG_ AS builder #:
+
+RUN mkdir /opt/spack-environment \
+  && (  echo "spack:"   \
+  &&    echo "  specs:" \
+  &&    echo "    - mpich @_MPICHVER_ %gcc@_GCCVER_"            \
+  &&    echo "    - hdf5 @_HDF5VER_ %gcc@_GCCVER_"              \
+  &&    echo "    - netcdf-c @_NETCDFCVER_ %gcc@_GCCVER_"       \
+  &&    echo "    - netcdf-fortran @_NETCDFFVER_ %gcc@_GCCVER_" \
+  &&    echo "  concretization: together"      \
+  &&    echo "  config:"                       \
+  &&    echo "    install_tree: /opt/software" \
+  &&    echo "  view: /opt/view") > /opt/spack-environment/spack.yaml
+
+RUN cd /opt/spack-environment && spack env activate . && spack install --fail-fast --no-checksum && spack gc -y
+
+RUN find -L /opt/view/* -type f -exec readlink -f '{}' \; | \
+    xargs file -i | \
+    grep 'charset=binary' | \
+    grep 'x-executable\|x-archive\|x-sharedlib' | \
+    awk -F: '{print $1}' | xargs strip -s
+
+RUN cd /opt/spack-environment && \
+    spack env activate --sh -d . >> /etc/profile.d/z10_spack_environment.sh
+
+# Bare OS image to run the installed executables
+FROM mkl/ubuntu
+
+COPY --from=builder /opt/spack-environment /opt/spack-environment
+COPY --from=builder /opt/software /opt/software
+COPY --from=builder /opt/view /opt/view
+COPY --from=builder /etc/profile.d/z10_spack_environment.sh /etc/profile.d/z10_spack_environment.sh
+
+ENTRYPOINT ["/bin/bash", "--rcfile", "/etc/profile", "-l"]
