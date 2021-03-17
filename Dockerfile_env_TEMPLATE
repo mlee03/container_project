@@ -1,4 +1,4 @@
-FROM _SPACK_TAG_ AS builder #:
+FROM _SPACK_TAG_ AS builder #:mkl/spack_ubuntu_gcc:20.04_10.1.0
 
 RUN mkdir /opt/spack-environment \
   && (  echo "spack:"   \
@@ -24,7 +24,7 @@ RUN cd /opt/spack-environment && \
     spack env activate --sh -d . >> /etc/profile.d/z10_spack_environment.sh
 
 # Bare OS image to run the installed executables
-FROM mkl/ubuntu
+FROM _UBUNTU_TAG_ #:mkl/ubuntu_gcc:20.04_10.1.0
 
 COPY --from=builder /opt/spack-environment /opt/spack-environment
 COPY --from=builder /opt/software /opt/software

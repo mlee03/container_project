@@ -30,6 +30,7 @@ sed -e "s@_UBUNTU_TAG_@a$ubuntu_tag@" \
     -e "s@_SPACK_VER_@$spack_ver@" < ${dfile_spack}_TEMPLATE > $dfile_spack
 
 sed -e "s@_SPACK_TAG_@$spack_tag@"    \
+    -e "s@_UBUNTU_TAG_@$ubuntu_tag@"  \
     -e "s@_GCCVER_@$gcc_ver@g"        \
     -e "s@_MPICHVER_@$mpich_ver@"     \
     -e "s@_HDF5VER_@$hdf5_ver@"       \
