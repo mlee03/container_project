@@ -1,4 +1,5 @@
-FROM _SPACK_TAG_ AS builder #:mkl/spack_ubuntu_gcc:20.04_10.1.0
+FROM _SPACK_TAG_ AS builder
+#:mkl/spack_ubuntu_gcc:20.04_10.1.0
 
 RUN mkdir /opt/spack-environment \
   && (  echo "spack:"   \
