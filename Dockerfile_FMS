@@ -1,0 +1,11 @@
+FROM mkl/env
+
+ENV DEBIAN_FRONTEND=noninteractive
+SHELL ["/bin/bash","-c"]
+
+RUN source /etc/profile.d/z10_spack_environment.sh \
+  && export FC=mpif90 && export F77=mpif90 && export CC=mpicc && export CXX=mpiCC \
+  && export FCFLAGS="-fcray-pointer -Waliasing -ffree-line-length-none -fno-range-check -O0 -g -W -fopenmp -fallow-argument-mismatch `nc-config --fflags`" \
+  && export CFLAGS="-O0 -g `nc-config --cflags`" \
+  && git clone https://github.com/NOAA-GFDL/FMS.git && cd FMS \
+  && autoreconf -iv && ./configure && make
