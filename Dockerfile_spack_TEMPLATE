@@ -1,13 +1,12 @@
-FROM _UBUNTU_TAG_
-#: mkl/ubuntu_gcc:20.04_10.1
+FROM _UBUNTU_TAG_ #: mkl/ubuntu_gcc:20.04_10.1
 
 #: TAKEN FROM
 #: https://github.com/spack/spack/blob/develop/share/spack/docker/ubuntu-1804.dockerfile
 
 ENV SPACK_ROOT=/opt/spack
-ENV SPACK_VER=_SPACK_VER_  #: releases/v0.16
+ENV SPACK_VER=_SPACK_VER_
 ENV DEBIAN_FRONTEND=noninteractive
-
+#: SPACK_VER=releases/v0.16
 
 RUN apt-get -yqq update && apt-get -yqq install --no-install-recommends \
         build-essential \
