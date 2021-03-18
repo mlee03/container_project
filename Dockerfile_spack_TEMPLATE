@@ -1,4 +1,5 @@
-FROM _UBUNTU_TAG_ #: mkl/ubuntu_gcc:20.04_10.1
+FROM _UBUNTU_TAG_
+#: mkl/ubuntu_gcc:20.04_10.1
 
 #: TAKEN FROM
 #: https://github.com/spack/spack/blob/develop/share/spack/docker/ubuntu-1804.dockerfile
