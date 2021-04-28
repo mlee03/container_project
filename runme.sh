@@ -3,7 +3,7 @@
 #: Changeme
 ubuntu_ver=20.04   #: ubuntu version for the base Docker ubuntu container/image
 spack_ver="releases/v0.16" #: spack version from Github
-gcc_ver=10.2.0     #: gcc version
+gcc_ver=10.3.0     #: gcc version
 mpich_ver=3.3.2
 hdf5_ver=1.8.19
 netcdfc_ver=4.7.4
