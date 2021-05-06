@@ -8,7 +8,7 @@ mpi:
   version: 3.3.2
 
 cmake:
-  build: YES
+  build: NO
   version: 3.17.2
 
 jpeg:
