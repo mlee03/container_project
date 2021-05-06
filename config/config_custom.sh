@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Compiler/MPI combination
-export HPC_COMPILER=${HPC_COMPILER:-"gnu/9.3.0"}
-export HPC_MPI=${HPC_MPI:-"openmpi/4.0.1"}
+export HPC_COMPILER="gcc/9.3.0" #${HPC_COMPILER:-"intel/2018_up4"}
+export HPC_MPI="openmpi/4.0.4"  #${HPC_MPI:-"impi/2018_up4"}
 
 # Build options
 export USE_SUDO=N
