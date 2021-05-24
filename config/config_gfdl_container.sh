@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Compiler/MPI combination
-export HPC_COMPILER="gcc/10.3.0"
+export HPC_COMPILER="gcc/9.3.0"
 export HPC_MPI="mpich/3.3.2"
 
 # Build options
