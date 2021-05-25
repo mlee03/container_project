@@ -1,6 +1,6 @@
 gnu:
   build: NO
-  version: 10.3.0
+  version: 9.3.0
 
 mpi:
   build: YES
@@ -32,7 +32,7 @@ jasper:
   version: 2.0.22
 
 udunits:
-  build: YES
+  build: NO
   version: 2.2.28
 
 hdf5:
