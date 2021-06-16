@@ -1,5 +1,5 @@
 gnu:
-  build: NO
+  build: YES
   version: 9.3.0
 
 mpi:
