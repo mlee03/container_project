@@ -2,7 +2,7 @@
 
 # Compiler/MPI combination
 export HPC_COMPILER="gcc/9.3.0"
-export HPC_MPI="mpich/3.3.2"
+export HPC_MPI="openmpi/4.0.4"
 
 # Build options
 export USE_SUDO=N
