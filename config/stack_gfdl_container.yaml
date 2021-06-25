@@ -9,7 +9,7 @@ mpi:
 
 cmake:
   build: YES
-  version: 3.17.2
+  version: 3.20.1
 
 jpeg:
   build: YES
@@ -29,7 +29,7 @@ szip:
 
 jasper:
   build: YES
-  version: 2.0.22
+  version: 2.0.25
 
 udunits:
   build: NO
@@ -57,7 +57,7 @@ netcdf:
 
 nccmp:
   build: YES
-  version: 1.8.7.0
+  version: 1.8.9.0
 
 nco:
   build: NO
@@ -71,7 +71,7 @@ pio:
 
 esmf:
   build: YES
-  version: 8_1_0_beta_snapshot_27
+  version: 8_1_1
   shared: YES
   enable_pnetcdf: NO
   debug: NO
@@ -147,8 +147,8 @@ w3emc:
 
 g2:
   build: YES
-  version: v3.4.1
-  install_as: 3.4.1
+  version: v3.4.2
+  install_as: 3.4.2
 
 g2c:
   build: YES
@@ -173,20 +173,20 @@ nceppost:
 
 upp:
   build: YES
-  version: upp_v10.0.0
-  install_as: 10.0.0
+  version: upp_v10.0.5
+  install_as: 10.0.5
   openmp: ON
 
 wrf_io:
   build: YES
-  version: v1.1.1-cmake-v5
-  install_as: 1.1.1
+  version: v1.2.0
+  install_as: 1.2.0
   openmp: ON
 
 bufr:
   build: YES
-  version: bufr_v11.4.0
-  install_as: 11.4.0
+  version: bufr_v11.5.0
+  install_as: 11.5.0
 
 wgrib2:
   build: YES
