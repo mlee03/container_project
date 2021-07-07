@@ -64,7 +64,7 @@ nco:
   version: 4.9.3
 
 pio:
-  build: NO
+  build: YES
   version: 2.5.1
   enable_pnetcdf: NO
   enable_gptl: NO
