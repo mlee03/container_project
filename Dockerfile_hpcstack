@@ -1,0 +1,122 @@
+FROM mklee03/gcc:9.4.0
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN git clone --recursive -b hpc-stack/v1.1.0 https://github.com/mlee03/container_project.git hpc-stack \
+ && cd hpc-stack \
+ && ./build_stack.sh -c config/config_gfdl_container.sh -y config/stack_gfdl_container.yaml -p $PWD/gcc-9.4.0
+
+FROM mklee03/gcc:9.4.0
+COPY --from=0 /hpc-stack/gcc-9.4.0 /hpc-stack/gcc-9.4.0
+
+ENV HPC_STACK=/hpc-stack/gcc-9.4.0
+ENV PATH=$PATH:$HPC_STACK/bin          \
+    Jasper_ROOT=$HPC_STACK             \
+    JASPER_ROOT=$HPC_STACK             \
+    JASPER_INCLUDES=$HPC_STACK/include \
+    JASPER_LIBRARIES=$HPC_STACK/lib64  \
+    ZLIB_ROOT=$HPC_STACK               \
+    ZLIB_INCLUDES=$HPC_STACK/include   \
+    ZLIB_LIBRARIES=$HPC_STACK/lib      \
+    PNG_ROOT=$HPC_STACK                \
+    PNG_INCLUDES=$HPC_STACK/include    \
+    PNG_LIBRARIES=$HPC_STACK/lib       \
+    HDF5_ROOT=$HPC_STACK               \
+    HDF5_INCLUDES=$HPC_STACK/include   \
+    HDF5_LIBRARIES=$HPC_STACK/lib      \
+    NetCDF=$HPC_STACK                  \
+    NetCDF_ROOT=$HPC_STACK             \
+    NetCDF_INCLUDES=$HPC_STACK/include \
+    NetCDF_LIBRARIES=$HPC_STACK/lib    \
+    g2_ROOT=$HPC_STACK                 \
+    G2_INC4=$HPC_STACK/include         \
+    G2_INCd=$HPC_STACK/include_d       \
+    G2_LIB4=$HPC_STACK/lib/libg2_4.a   \
+    G2_LIBd=$HPC_STACK/lib/libg2_d.a   \
+    g2tmpl_ROOT=$HPC_STACK             \
+    G2TMPL_INC=$HPC_STACK/include      \
+    G2TMPL_LIB=$HPC_STACK/lib/libg2tmpl.a \
+    ip_ROOT=$HPC_STACK                 \
+    IP_INC4=$HPC_STACK/include_4       \
+    IP_INC8=$HPC_STACK/include_8       \
+    IP_INCd=$HPC_STACK/include_d       \
+    IP_LIB4=$HPC_STACK/lib/libip_4.a   \
+    IP_LIB8=$HPC_STACK/lib/libip_8.a   \
+    IP_LIBd=$HPC_STACK/lib/libip_d.a   \
+    sp_ROOT=$HPC_STACK                 \
+    SP_INC4=$HPC_STACK/include_4       \
+    SP_INC8=$HPC_STACK/include_8       \
+    SP_INCd=$HPC_STACK/include_d       \
+    SP_LIB4=$HPC_STACK/lib/libsp_4.a   \
+    SP_LIB8=$HPC_STACK/lib/libsp_8.a   \
+    SP_LIBd=$HPC_STACK/lib/libsp_d.a   \
+    sigio_ROOT=$HPC_STACK              \
+    SIGIO_INC=$HPC_STACK/include       \
+    SIGIO_LIB=$HPC_STACK/lib/libsigio.a \
+    bacio_ROOT=$HPC_STACK              \
+    BACIO_INC4=$HPC_STACK/include_4    \
+    BACIO_INC8=$HPC_STACK/include_8    \
+    BACIO_LIB4=$HPC_STACK/lib/libbacio_4.a \
+    BACIO_LIB8=$HPC_STACK/lib/libbacio_8.a \
+    w3nco_ROOT=$HPC_STACK              \
+    W3NCO_INC4=$HPC_STACK/include_4    \
+    W3NCO_INC8=$HPC_STACK/include_8    \
+    W3NCO_INCd=$HPC_STACK/include_d    \
+    W3NCO_LIB4=$HPC_STACK/lib/libw3nco_4.a \
+    W3NCO_LIB8=$HPC_STACK/lib/libw3nco_8.a \
+    W3NCO_LIBd=$HPC_STACK/lib/libw3nco_d.a \
+    nemsio_ROOT=$HPC_STACK                 \
+    NEMSIO_INC=$HPC_STACK/include          \
+    NEMSIO_LIB=$HPC_STACK/lib/libnemsio.a  \
+    w3emc_ROOT=$HPC_STACK                  \
+    W3EMC_INC4=$HPC_STACK/include_4        \
+    W3EMC_INC8=$HPC_STACK/include_8        \
+    W3EMC_INCd=$HPC_STACK/include_d        \
+    W3EMC_LIB4=$HPC_STACK/lib/libw3emc_4.a \
+    W3EMC_LIB8=$HPC_STACK/lib/libw3emc_8.a \
+    W3EMC_LIBd=$HPC_STACK/lib/libw3emc_d.a \
+    crtm_ROOT=$HPC_STACK                   \
+    CRTM_INC=$HPC_STACK/include            \
+    CRTM_LIB=$HPC_STACK/lib/libcrtm.a      \
+    upp_ROOT=$HPC_STACK                    \
+    NCEPPOST_INC=$HPC_STACK/include        \
+    SP_LIBd=$HPC_STACK/lib/libsp_d.a   \
+    sigio_ROOT=$HPC_STACK              \
+    SIGIO_INC=$HPC_STACK/include       \
+    SIGIO_LIB=$HPC_STACK/lib/libsigio.a \
+    bacio_ROOT=$HPC_STACK              \
+    BACIO_INC4=$HPC_STACK/include_4    \
+    BACIO_INC8=$HPC_STACK/include_8    \
+    BACIO_LIB4=$HPC_STACK/lib/libbacio_4.a \
+    BACIO_LIB8=$HPC_STACK/lib/libbacio_8.a \
+    w3nco_ROOT=$HPC_STACK              \
+    W3NCO_INC4=$HPC_STACK/include_4    \
+    W3NCO_INC8=$HPC_STACK/include_8    \
+    W3NCO_INCd=$HPC_STACK/include_d    \
+    W3NCO_LIB4=$HPC_STACK/lib/libw3nco_4.a \
+    W3NCO_LIB8=$HPC_STACK/lib/libw3nco_8.a \
+    W3NCO_LIBd=$HPC_STACK/lib/libw3nco_d.a \
+    nemsio_ROOT=$HPC_STACK                 \
+    NEMSIO_INC=$HPC_STACK/include          \
+    NEMSIO_LIB=$HPC_STACK/lib/libnemsio.a  \
+    w3emc_ROOT=$HPC_STACK                  \
+    W3EMC_INC4=$HPC_STACK/include_4        \
+    W3EMC_INC8=$HPC_STACK/include_8        \
+    W3EMC_INCd=$HPC_STACK/include_d        \
+    W3EMC_LIB4=$HPC_STACK/lib/libw3emc_4.a \
+    W3EMC_LIB8=$HPC_STACK/lib/libw3emc_8.a \
+    W3EMC_LIBd=$HPC_STACK/lib/libw3emc_d.a \
+    crtm_ROOT=$HPC_STACK                   \
+    CRTM_INC=$HPC_STACK/include            \
+    CRTM_LIB=$HPC_STACK/lib/libcrtm.a      \
+    upp_ROOT=$HPC_STACK                    \
+    NCEPPOST_INC=$HPC_STACK/include        \
+    NCEPPOST_LIB=$HPC_STACK/lib/libupp.a   \
+    POST_INC=$HPC_STACK/include            \
+    POST_LIB=$HPC_STACK/lib/libupp.a       \
+    UPP_INC=$HPC_STACK/include             \
+    UPP_LIB=$HPC_STACK/lib/libupp.a        \
+    ESMFMKFILE=$HPC_STACK/lib/esmf.mk
+
+
+ENTRYPOINT ["/bin/bash"]
