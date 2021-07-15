@@ -7,7 +7,7 @@ ENV FMS_ROOT=/home/FMS/gcc/9.4.0
 
 RUN cd /home && mkdir FMS \
   && git clone https://github.com/NOAA-GFDL/FMS.git src \
-  && cd src && checkout $fms_version \
+  && cd src && git checkout $fms_version \
   && export NetCDF_ROOT=`nc-config --prefix` \
   && cmake -DCMAKE_INSTALL_PREFIX=$FMS_ROOT -DOPENMP=ON -D32BIT=ON -D64BIT=ON -DGFS_PHYS=ON . \
   && make install \
