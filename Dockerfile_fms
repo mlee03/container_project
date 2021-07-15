@@ -1,0 +1,12 @@
+FROM mklee03/hpc_stack:9.4.0
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV FMS_ROOT=/home/FMS/gcc/9.4.0
+
+RUN cd /home && mkdir FMS \
+  && git clone -b main https://github.com/NOAA-GFDL/FMS.git src \
+  && cd src \
+  && export NetCDF_ROOT=`nc-config --prefix` \
+  && cmake -DCMAKE_INSTALL_PREFIX=$FMS_ROOT -DOPENMP=ON -D32BIT=ON -D64BIT=ON -DGFS_PHYS=ON . \
+  && make install \
+  && cd ../ && rm -rf src
