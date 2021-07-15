@@ -14,7 +14,7 @@ RUN export CMAKE_FLAGS="-D32BIT=ON -DMULTI_GASES=OFF -DCMAKE_BUILD_TYPE=Release"
 
 # coupled
 RUN export CMAKE_FLAGS="-DMULTI_GASES=OFF -DCMAKE_BUILD_TYPE=Release" \
- && export CCPP_SUITES="FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_couplednsst"
+ && export CCPP_SUITES="FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_couplednsst" \
  && export CMAKE_FLAGS="${CMAKE_FLAGS} -DAPP=S2S" \
  && src/build.sh && mv src/build/ufs_model ufs-weather-model/cpld.exe \
  && rm -rf src/build
