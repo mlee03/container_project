@@ -1,0 +1,23 @@
+name: build_ufs
+
+on:
+  push:
+    branches:
+      - ufs_docker
+
+env:
+  DOCKER_TAG: 2020.04.03
+
+jobs:
+  build_fms_container:
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: docker_build
+        run: |
+          docker build -f ./Dockerfile_ufs -t mklee03/ufs:${{env.DOCKER_TAG}} .
+          echo "${{secrets.DOCKER_PASSWORD}}" | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
+          docker push mklee03/ufs:${{env.DOCKER_TAG}}
