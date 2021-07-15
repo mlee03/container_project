@@ -10,8 +10,9 @@ env:
 
 jobs:
   build_fms_container:
-  runs-on: ubuntu-latest
-  steps:
+
+    runs-on: ubuntu-latest
+    steps:
       - name: checkout
         uses: actions/checkout@v2
 
