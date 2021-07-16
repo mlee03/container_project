@@ -23,5 +23,5 @@ RUN apt-get -yqq update                          \
  && apt-get remove -y software-properties-common         \
  && rm -rf /var/lib/apt/lists/*
 
-
+WORKDIR /fms-ufs-weather-model
 ENTRYPOINT ["/bin/bash"]
