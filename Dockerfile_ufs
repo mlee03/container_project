@@ -2,7 +2,7 @@ FROM mklee03/fms:2020.04.03
 
 WORKDIR /ufs-weather-model
 
-COPY *.sh ./.
+COPY *.sh ./
 
 RUN git clone --recursive --branch develop https://github.com/ufs-community/ufs-weather-model.git src
 
