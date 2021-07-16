@@ -9,7 +9,7 @@ env:
   DOCKER_TAG: 2020.04.03
 
 jobs:
-  build_fms_container:
+  build_ufs_container:
 
     runs-on: ubuntu-latest
     steps:
