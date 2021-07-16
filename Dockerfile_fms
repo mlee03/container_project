@@ -3,11 +3,14 @@ FROM mklee03/hpc_stack:9.4.0
 ARG fms_version=main
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV FMS_ROOT=/home/FMS/gcc/9.4.0
+ENV WORKDIR=/fms-ufs-weather-model \
+    FMS_ROOT=$workdir/FMS/gcc/9.4.0
 
-RUN cd /home && mkdir FMS \
-  && git clone https://github.com/NOAA-GFDL/FMS.git src \
-  && cd src && git checkout $fms_version \
+WORKDIR $WORKDIR
+
+RUN git clone https://github.com/NOAA-GFDL/FMS.git FMS/src \
+  && cd FMS/src && git checkout $fms_version \
+  && echo `git log -n 1`                     \
   && export NetCDF_ROOT=`nc-config --prefix` \
   && cmake -DCMAKE_INSTALL_PREFIX=$FMS_ROOT -DOPENMP=ON -D32BIT=ON -D64BIT=ON -DGFS_PHYS=ON . \
   && make install \
