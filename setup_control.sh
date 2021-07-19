@@ -31,8 +31,8 @@ atparse < ${PATHRT}/parm/${NEMS_CONFIGURE:-nems.configure} > $mydir/nems.configu
 
 #: edit fv3_run
 echo '#!/bin/bash' > $mydir/edit_fv3_run_script.sh
-grep -m 1 -A 10 "gaea" rt.sh | grep "DISKNM" >> $mydir/edit_fv3_run_script.sh
-grep -m 3 "INPUTDATA" < rt.sh >> $mydir/edit_fv3_run_script.sh
+grep -m 1 -A 10 "gaea" ${PATHRT}/rt.sh | grep "DISKNM" >> $mydir/edit_fv3_run_script.sh
+grep -m 3 "INPUTDATA" < ${PATHRT}/rt.sh >> $mydir/edit_fv3_run_script.sh
 chmod +x $mydir/edit_fv3_run_script.sh
 source $mydir/edit_fv3_run_script.sh
 
