@@ -30,26 +30,23 @@ atparse < ${PATHRT}/parm/${NEMS_CONFIGURE:-nems.configure} > $mydir/nems.configu
 cp ${PATHRT}/parm/fd_nems.yaml $mydir/fd_nems.yaml
 atparse < ${PATHRT}/parm/${NEMS_CONFIGURE:-nems.configure} > $mydir/nems.configure
 
+#: edit fv3_run
+echo '#!/bin/bash' > $mydir/edit_fv3_run_script.sh
+grep -m 1 -A 10 "gaea" rt.sh | grep "DISKNM" >> $mydir/edit_fv3_run_script.sh
+grep -m 3 "INPUTDATA" < rt.sh >> $mydir/edit_fv3_run_script.sh
+chmod +x $mydir/edit_fv3_run_script.sh
+source $mydir/edit_fv3_run_script.sh
+
+atparse < ${PATHRT}/fv3_conf/${FV3_RUN:-fv3_run.IN} > $mydir/fv3_run
+chmod +x $mydir/fv3_run
+
 if [[ $CPLWAV == .T. ]]; then
-  edit_ww3_input  < ${PATHRT}/parm/ww3_multi.inp.IN > ww3_multi.inp
+  edit_ww3_input  < ${PATHRT}/parm/ww3_multi.inp.IN > $mydir/ww3_multi.inp
 fi
 
 if [[ $DATM_NEMS = 'true' ]] || [[ $DATM_CDEPS = 'true' ]] || [[ $S2S = 'true' ]]; then
-  edit_ice_in     < ${PATHRT}/parm/ice_in_template > ice_in
-  edit_mom_input  < ${PATHRT}/parm/${MOM_INPUT:-MOM_input_template_$OCNRES} > INPUT/MOM_input
-  edit_diag_table < ${PATHRT}/parm/${DIAG_TABLE:-diag_table_template} > diag_table
-  edit_data_table < ${PATHRT}/parm/data_table_template > data_table
+  edit_ice_in     < ${PATHRT}/parm/ice_in_template > $mydir/ice_in
+  edit_mom_input  < ${PATHRT}/parm/${MOM_INPUT:-MOM_input_template_$OCNRES} > $mydir/INPUT/MOM_input
+  edit_diag_table < ${PATHRT}/parm/${DIAG_TABLE:-diag_table_template} > $mydir/diag_table
+  edit_data_table < ${PATHRT}/parm/data_table_template > $mydir/data_table
 fi
-if [[ $DATM_NEMS = 'true' ]]; then
-  cp ${PATHRT}/parm/datm_data_table.IN datm_data_table
-fi
-
-if [[ $DATM_CDEPS = 'true' ]]; then
-  atparse < ${PATHRT}/parm/${DATM_IN_CONFIGURE:-datm_in} > datm_in
-  atparse < ${PATHRT}/parm/datm.streams.IN > datm.streams
-fi
-
-
-
-#atparse < ${PATHRT}/fv3_conf/${FV3_RUN:-fv3_run.IN} > $mydir/fv3_run
-#source $mydir/fv3_run
