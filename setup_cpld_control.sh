@@ -12,8 +12,8 @@ export CCPP_SUITES="FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupl
 export CMAKE_FLAGS="${CMAKE_FLAGS} -DAPP=S2S -DMOM6SOLO=ON"
 
 src/build.sh
-mv src/build/ufs_model $mydir/control.exe
-rm -rf src/build
+mv src/build/ufs_model $mydir/cpld_control.exe
+#rm -rf src/build
 
 #setup input files
 export MACHINE_ID=gaea.gnu
