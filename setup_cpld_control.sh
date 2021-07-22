@@ -7,7 +7,7 @@ mydir=/ufs-weather-model/cpld_control
 mkdir -p $mydir
 
 #build
-export CMAKE_FLAGS="-D32BIT=ON -DMULTI_GASES=OFF -DCMAKE_BUILD_TYPE=Release -DINLINE_POST=ON -DMPI=ON"
+export CMAKE_FLAGS="-DCMAKE_BUILD_TYPE=Release -DINLINE_POST=ON -DMPI=ON"
 export CCPP_SUITES="FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_couplednsst"
 export CMAKE_FLAGS="${CMAKE_FLAGS} -DAPP=S2S -DMOM6SOLO=ON"
 
